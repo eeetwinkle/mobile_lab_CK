@@ -1,3 +1,42 @@
 <resources>
-    <string name="app_name">MyLabs</string>
+    <string name="app_name">Фитнес Трекер ДВФУ</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="label_hello_world">Hello, world!</string>
+    <string name="login_title">Вход</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Пароль</string>
+    <string name="login_button">Войти</string>
+    <string name="register_prompt">Еще нет аккаунта? Зарегистрироваться</string>
+    <string name="register_clickable">Зарегистрироваться</string>
+
+    <string name="register_title">Зарегистрироваться</string>
+    <string name="name_hint">Имя</string>
+    <string name="confirm_password_hint">Подтвердите пароль</string>
+    <string name="register_button">Зарегистрироваться</string>
+    <string name="login_prompt">Уже есть аккаунт? Войти</string>
+    <string name="login_clickable">Войти</string>
+
+    <string name="main_title">Пожалуй лучший фитнес трекер в ДВФУ</string>
+
+    <string name="error_email">Введите корректный email</string>
+    <string name="error_password">Пароль должен содержать минимум 6 символов</string>
+    <string name="error_name">Введите ваше имя</string>
+    <string name="error_password_mismatch">Пароли не совпадают</string>
+    <string name="welcome_text1">Пожалуй лучший фитнес трекер в ДВФУ</string>
+    <string name="login_text">Войти</string>
+    <string name="registration_text">Зарегистрироваться</string>
+    <string name="welcome_text2">Созданный студентами 2-го курса</string>
+    <string name="name">Имя</string>
+    <string name="email">Email</string>
+    <string name="password">Пароль</string>
+    <string name="pass_confirm">Подтвердите пароль</string>
+    <string name="no_acc">Еще нет аккаунта? Зарегистрироваться</string>
+    <string name="have_acc">Уже есть аккаунт? Войти</string>
+    <string name="login">Логин</string>
+    <string name="politics">Нажимая на кнопку, вы соглашаетесь с политикой конфиденциальности и обработки персональных данных, а также принимаете пользовательское соглашение</string>
+    <string name="female">Женский</string>
+    <string name="another">Другое</string>
+    <string name="male">Мужской</string>
+    <string name="gender">Пол</string>
 </resources>
