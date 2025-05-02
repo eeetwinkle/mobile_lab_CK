@@ -39,4 +39,11 @@
     <string name="another">Другое</string>
     <string name="male">Мужской</string>
     <string name="gender">Пол</string>
+    <string name="activity">Активность</string>
+    <string name="profile">Профиль</string>
+    <string name="save">Сохранить</string>
+    <string name="change_pass">Изменить пароль</string>
+    <string name="go_away">Выйти</string>
+    <string name="time_to_train">Время потренить</string>
+    <string name="start_activity">Нажимай на кнопку ниже и начинаем трекать активность</string>
 </resources>
