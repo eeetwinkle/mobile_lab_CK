@@ -58,4 +58,7 @@
     <string name="vertic">|</string>
     <string name="finish">Финиш</string>
     <string name="comment">Комментарий</string>
+    <string name="lets_go">Погнали? :)</string>
+    <string name="bike">Велосипед</string>
+    <string name="to_start">Начать</string>
 </resources>

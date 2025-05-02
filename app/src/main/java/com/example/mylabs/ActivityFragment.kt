@@ -33,9 +33,10 @@ class ActivityFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when(position) {
                 0 -> "Моя"
-                1 -> "Пользователей"
+                1 -> "Пользователи"
                 else -> null
             }
         }.attach()
+
     }
 }
