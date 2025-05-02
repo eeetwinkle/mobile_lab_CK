@@ -13,7 +13,6 @@
         android:theme="@style/Theme.Activity"
         tools:targetApi="31">
 
-        <!-- Главная активность, с которой начинается приложение -->
         <activity
             android:name=".MyActivity"
             android:exported="true">
@@ -23,7 +22,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Активности для входа и регистрации -->
         <activity
             android:name=".LoginActivity"
             android:exported="false">
@@ -34,7 +32,6 @@
             android:exported="false">
         </activity>
 
-        <!-- MainActivity может быть скрыта, если она больше не используется или не является стартовой -->
         <activity
             android:name=".MainActivity"
             android:exported="false">

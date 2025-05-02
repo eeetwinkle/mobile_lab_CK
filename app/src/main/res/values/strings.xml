@@ -46,4 +46,5 @@
     <string name="go_away">Выйти</string>
     <string name="time_to_train">Время потренить</string>
     <string name="start_activity">Нажимай на кнопку ниже и начинаем трекать активность</string>
+    <string name="user_activity">Активность пользователей</string>
 </resources>
