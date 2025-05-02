@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="8dp"/>
+    <ImageView
+        android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/user_activity"
-        android:textSize="18sp" />
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="700dp"
+        app:srcCompat="@drawable/ic_start" />
 
 </FrameLayout>

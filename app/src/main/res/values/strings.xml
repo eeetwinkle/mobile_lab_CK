@@ -47,4 +47,15 @@
     <string name="time_to_train">Время потренить</string>
     <string name="start_activity">Нажимай на кнопку ниже и начинаем трекать активность</string>
     <string name="user_activity">Активность пользователей</string>
+    <string name="when_was">Как давно</string>
+    <string name="name_activity">Имя активности</string>
+    <string name="how_long">Продолжительность</string>
+    <string name="distance">Дистанция</string>
+    <string name="user_name">Имя пользователя</string>
+    <string name="activity_name">Имя активности</string>
+    <string name="start">Старт</string>
+    <string name="_00_00">00:00</string>
+    <string name="vertic">|</string>
+    <string name="finish">Финиш</string>
+    <string name="comment">Комментарий</string>
 </resources>

@@ -1,10 +1,29 @@
 package com.example.mylabs
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MyActivity : AppCompatActivity() {
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+
+        intent?.getStringExtra("NAVIGATE_TO")?.let { tag ->
+            val fragment = when (tag) {
+                "MY" -> MyFragment()
+                "USER" -> UserFragment()
+                else -> null
+            }
+
+            fragment?.let {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, it, tag)
+                    .commit()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

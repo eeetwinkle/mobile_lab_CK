@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="?attr/selectableItemBackground">
+
+        <LinearLayout
+            android:id="@+id/header_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/activity_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/activity_name"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/trasher"
+                android:layout_width="24dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_trash" />
+
+            <ImageView
+                android:id="@+id/info"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_more" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/length"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/distance"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/header_row" />
+
+        <TextView
+            android:id="@+id/when_was"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/when_was"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/length" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/how_long"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/when_was" />
+
+        <LinearLayout
+            android:id="@+id/time_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/time">
+
+            <TextView
+                android:id="@+id/start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_00_00"
+                android:textColor="#666666"
+                android:textSize="14sp"
+                android:layout_marginStart="4dp" />
+
+            <TextView
+                android:id="@+id/devider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vertic"
+                android:textColor="#666666"
+                android:textSize="14sp"
+                android:layout_marginHorizontal="8dp" />
+
+            <TextView
+                android:id="@+id/end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/finish"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/and_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_00_00"
+                android:textColor="#666666"
+                android:textSize="14sp"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/time_row">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:hint="@string/comment" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
