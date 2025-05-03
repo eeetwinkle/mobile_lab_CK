@@ -41,7 +41,7 @@ class MyFragment : Fragment() {
 
         val startButton = view.findViewById<ImageView>(R.id.start_activity)
         startButton.setOnClickListener {
-            val intent = Intent(requireContext(), ActivityStartActivity::class.java)
+            val intent = Intent(requireContext(), ActivityStart::class.java)
             startActivity(intent)
         }
 
