@@ -2,22 +2,23 @@ package com.example.mylabs
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
+import kotlin.random.Random
 
 class MyFragment : Fragment() {
+
     private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: ActivitiesAdapter
+    private lateinit var viewModel: MyViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.fragment_my, container, false)
     }
@@ -28,8 +29,8 @@ class MyFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val adapter = ActivitiesAdapter { activity ->
-            val intent = android.content.Intent(requireContext(), ActivityDetailActivity::class.java).apply {
+        adapter = ActivitiesAdapter { activity ->
+            val intent = Intent(requireContext(), ActivityDetailActivity::class.java).apply {
                 putExtra("ACTIVITY_ID", activity.id)
                 putExtra("SOURCE_FRAGMENT", "USER")
             }
@@ -37,25 +38,85 @@ class MyFragment : Fragment() {
         }
 
         recyclerView.adapter = adapter
-        loadMyActivities(adapter)
+
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+        ).get(MyViewModel::class.java)
+
+        viewModel.allActivities.observe(viewLifecycleOwner) { newActivitiesList ->
+            Log.d("MyFragment", "newActivitiesList size: ${newActivitiesList.size}")
+
+            val filteredList = newActivitiesList.filter { it.user == "me" }
+            val items = transformToActivityItems(filteredList)
+            adapter.submitList(items)
+        }
 
         val startButton = view.findViewById<ImageView>(R.id.start_activity)
         startButton.setOnClickListener {
             val intent = Intent(requireContext(), ActivityStart::class.java)
             startActivity(intent)
         }
-
     }
 
-    private fun loadMyActivities(adapter: ActivitiesAdapter) {
-        val items = mutableListOf<ActivityItem>()
+    private fun transformToActivityItems(activities: List<Activity>): List<ActivityItem> {
+        if (activities.isEmpty()) return emptyList()
 
-        items.add(ActivityItem.DateHeader("Вчера"))
-        items.add(ActivityItem.Activity(1, "14.32 км", "2 часа 46 минут", "Серфинг", "14 часов назад", "", true))
+        val grouped = activities.sortedByDescending { it.startTime }
+            .groupBy { formatDateHeader(it.startTime) }
 
-        items.add(ActivityItem.DateHeader("Май 2022 года"))
-        items.add(ActivityItem.Activity(3, "1 000 м", "60 минут", "Велосипед", "29.05.2022", "", true))
+        val result = mutableListOf<ActivityItem>()
+        for ((date, items) in grouped) {
+            result.add(ActivityItem.DateHeader(date))
+            result.addAll(items.map {
+                val randomKm = Random.nextInt(1, 11)
+                val kmString = "$randomKm км"
+                ActivityItem.Activity(
+                    id = it.id,
+                    length = kmString,
+                    time = formatDuration(it.startTime, it.endTime),
+                    name = it.type.displayName,
+                    when_was = formatTimeAgo(it.startTime),
+                    user_name = it.user,
+                    isMyActivity = it.user == "me"
+                )
+            })
+        }
+        return result
+    }
 
-        adapter.submitList(items)
+    private fun formatDuration(start: Long, end: Long): String {
+        val durationMillis = end - start
+        val minutes = durationMillis / 60000
+        val hours = minutes / 60
+        val remainingMinutes = minutes % 60
+        return if (hours > 0) "$hours ч $remainingMinutes мин" else "$minutes мин"
+    }
+
+    private fun formatDateHeader(timestamp: Long): String {
+        val now = System.currentTimeMillis()
+        val todayStart = now - (now % 86400000)
+        val yesterdayStart = todayStart - 86400000
+
+        return when {
+            timestamp >= todayStart -> "Сегодня"
+            timestamp >= yesterdayStart -> "Вчера"
+            else -> {
+                val sdf = java.text.SimpleDateFormat("MMMM yyyy", java.util.Locale("ru"))
+                sdf.format(java.util.Date(timestamp))
+            }
+        }
+    }
+
+    private fun formatTimeAgo(timestamp: Long): String {
+        val diff = System.currentTimeMillis() - timestamp
+        val minutes = diff / 60000
+        return when {
+            minutes < 60 -> "$minutes мин назад"
+            minutes < 1440 -> "${minutes / 60} ч назад"
+            else -> "${minutes / 1440} дн назад"
+        }
     }
 }
+
+

@@ -10,23 +10,29 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.launch
 
 class ActivityStart : AppCompatActivity() {
-
-    private var selectedType: ActivityType? = null
+    lateinit var myVM : MyViewModel
+    private var selectedType: ActivityTypes? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
+        Depends.context = applicationContext
+        Depends.initDatabase()
+
         val recyclerView = findViewById<RecyclerView>(R.id.activity_type_recycler)
 
         val activityTypes = listOf(
-            ActivityType("Велосипед", R.drawable.ic_bike),
-            ActivityType("Бег", R.drawable.ic_run),
-            ActivityType("Шаг", R.drawable.ic_walk),
+            ActivityTypes("Велосипед", R.drawable.ic_bike),
+            ActivityTypes("Бег", R.drawable.ic_run),
+            ActivityTypes("Шаг", R.drawable.ic_walk),
         )
 
         recyclerView.layoutManager =
@@ -35,9 +41,16 @@ class ActivityStart : AppCompatActivity() {
         recyclerView.adapter = ActivityTypeAdapter(activityTypes) { selected ->
             selectedType = selected
         }
+        myVM = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+        ).get(MyViewModel::class.java)
 
         findViewById<Button>(R.id.start_button).setOnClickListener {
             if (selectedType != null) {
+                lifecycleScope.launch {
+                    myVM.addMyActivity(selectedType!!.name)
+                }
                 val intent = Intent(this, ActivityNewActivity::class.java)
                 intent.putExtra("ACTIVITY_TYPE", selectedType!!.name)
                 startActivity(intent)
@@ -48,11 +61,11 @@ class ActivityStart : AppCompatActivity() {
     }
 }
 
-data class ActivityType(val name: String, val iconRes: Int)
+data class ActivityTypes(val name: String, val iconRes: Int)
 
 class ActivityTypeAdapter(
-    private val items: List<ActivityType>,
-    private val onItemSelected: (ActivityType) -> Unit
+    private val items: List<ActivityTypes>,
+    private val onItemSelected: (ActivityTypes) -> Unit
 ) : RecyclerView.Adapter<ActivityTypeAdapter.ViewHolder>() {
 
     private var selectedPosition = RecyclerView.NO_POSITION

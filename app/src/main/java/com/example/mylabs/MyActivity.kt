@@ -7,7 +7,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MyActivity : AppCompatActivity() {
 
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
 
         intent?.getStringExtra("NAVIGATE_TO")?.let { tag ->

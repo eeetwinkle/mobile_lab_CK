@@ -25,16 +25,16 @@ class ActivitiesAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            TYPE_HEADER -> DateHeaderViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_date_header, parent, false)
-            )
-            TYPE_ITEM -> ActivityViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_activity, parent, false),
-                onItemClick
-            )
+            TYPE_HEADER -> {
+                val view = inflater.inflate(R.layout.item_date_header, parent, false)
+                DateHeaderViewHolder(view)
+            }
+            TYPE_ITEM -> {
+                val view = inflater.inflate(R.layout.item_activity, parent, false)
+                ActivityViewHolder(view, onItemClick)
+            }
             else -> throw IllegalArgumentException("Invalid view type")
         }
     }
